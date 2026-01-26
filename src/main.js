@@ -15,7 +15,7 @@ self.MonacoEnvironment = {
 // 2. Initialize Editor
 const editorContainer = document.getElementById('editor');
 const editor = monaco.editor.create(editorContainer, {
-  value: 'puts "hello"',
+  value: '# Write your own Ruby Code!\n# Type your code in the editor window.\n# When finished, press the play button to run your code.\n\nputs "Hello, Ruby!"',
   language: 'ruby',
   theme: 'vs-dark',
   automaticLayout: true,
