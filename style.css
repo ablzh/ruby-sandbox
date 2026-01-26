@@ -65,6 +65,17 @@ body {
   font-size: 0.95rem;
 }
 
+.banner a {
+  color: #0056b3; /* Darker blue for contrast on cyan background */
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.banner a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
 /* Workspace Grid */
 .workspace {
   flex: 1;
