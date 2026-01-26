@@ -139,9 +139,13 @@ document.getElementById('btn-play').addEventListener('click', async () => {
     // We want the string content.
     const output = result.toString();
     outputDiv.innerText = output;
+    // Auto-scroll to bottom
+    outputDiv.scrollTop = outputDiv.scrollHeight;
   } catch (e) {
     console.error(e);
     outputDiv.innerText = "Execution Error: " + (e.message || e);
+    // Auto-scroll to bottom
+    outputDiv.scrollTop = outputDiv.scrollHeight;
   }
 });
 
