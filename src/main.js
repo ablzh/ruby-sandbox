@@ -113,6 +113,16 @@ document.getElementById('btn-play').addEventListener('click', async () => {
   // We use a simple approach: $stdout = StringIO.new; ...; $stdout.string
   const wrappedCode = `
     require 'stringio'
+    require 'js'
+
+    module Kernel
+      def sleep(seconds)
+        JS.global[:Promise].new(->(resolve, reject) {
+          JS.global.setTimeout(resolve, seconds * 1000)
+        }).await
+      end
+    end
+
     $stdout = StringIO.new
     begin
       ${code}
@@ -124,13 +134,14 @@ document.getElementById('btn-play').addEventListener('click', async () => {
   `;
 
   try {
-    const result = rubyVM.eval(wrappedCode);
+    const result = await rubyVM.evalAsync(wrappedCode);
     // result is a RubyValue. toString() gives the inspection.
     // We want the string content.
     const output = result.toString();
     outputDiv.innerText = output;
   } catch (e) {
-    outputDiv.innerText = "Execution Error: " + e.message;
+    console.error(e);
+    outputDiv.innerText = "Execution Error: " + (e.message || e);
   }
 });
 
