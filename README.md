@@ -5,7 +5,14 @@ Inspired by [Ken H. Burres III's Python Sandbox Turtle Mode](https://pythonsandb
 
 A single-page Ruby sandbox environment using Monaco Editor and Ruby WASM (WebAssembly).
 
-## Architecture
-- **Vite**: Bundler and dev server.
-- **Monaco Editor**: Code editing experience.
-- **@ruby/wasm-wasi**: Ruby runtime in the browser.
+## Credits
+
+### Core Stack
+- **[Vite](https://vitejs.dev/)**: Bundler and dev server.
+- **[Monaco Editor](https://microsoft.github.io/monaco-editor/)**: Code editing experience.
+- **[@ruby/wasm-wasi](https://github.com/ruby/ruby.wasm)**: Ruby runtime in the browser.
+
+### AI Assistance
+This project was built with the assistance of:
+- **Agent**: [Opencode CLI](https://opencode.ai/)
+- **Model**: Google Gemini 3 Pro
