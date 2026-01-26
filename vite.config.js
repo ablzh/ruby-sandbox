@@ -4,5 +4,11 @@ export default defineConfig({
   base: './', // Ensures assets are loaded correctly on GitHub Pages
   build: {
     target: 'esnext' // WebAssembly requires modern browser support
-  }
+  },
+  plugins: [{
+    name: 'html-inject-year',
+    transformIndexHtml(html) {
+      return html.replace('%BUILD_YEAR%', new Date().getFullYear().toString());
+    }
+  }]
 });

@@ -211,6 +211,24 @@ body {
   gap: 15px;
 }
 
+.footer-center {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.footer-center a {
+  color: var(--banner-color);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: all 0.2s ease;
+}
+
+.footer-center a:hover {
+  border-bottom-color: var(--banner-color);
+  filter: brightness(1.2);
+}
+
 .btn-icon {
   background: none;
   border: none;
