@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby Sandbox</title>
+    <!-- We import style in main.js usually, but link here is fine too. -->
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-brand">Ruby Sandbox</div>
+      <div class="nav-menu">
+        <a href="#">Modes</a>
+        <a href="#">Docs</a>
+        <a href="#">About Ruby Sandbox</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Instruction Banner -->
+    <div class="banner">
+      <p>Write your own Ruby Code! Type your code in the editor window. When finished, press the play button to run your code.</p>
+    </div>
+
+    <!-- Workspace Grid -->
+    <div class="workspace" id="workspace">
+      <!-- Left Column: Editor -->
+      <div class="pane editor-pane">
+        <div class="pane-header">Editor Window</div>
+        <div id="editor" class="monaco-container"></div>
+      </div>
+
+      <!-- Right Column: Output -->
+      <div class="pane output-pane" id="output-pane">
+        <div class="pane-header">Output Window</div>
+        <div id="output" class="output-container">
+          <div class="loading-state">Initializing Ruby VM...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Controls -->
+    <footer class="footer">
+      <div class="footer-left">
+        <button id="btn-play" class="btn-icon btn-play" title="Run Code">
+          <!-- Cyan Square with White Triangle -->
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <button id="btn-save" class="btn-icon btn-save" title="Save as .rb">
+          <!-- Floppy Disk -->
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="footer-right">
+        <button id="btn-eye" class="btn-icon btn-eye" title="Toggle Output">
+          <!-- Eye Icon -->
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
