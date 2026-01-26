@@ -26,32 +26,83 @@ const editor = monaco.editor.create(editorContainer, {
 
 // 3. Initialize Ruby VM
 const outputDiv = document.getElementById('output');
+const btnLoadRuby = document.getElementById('btn-load-ruby');
+const btnPlay = document.getElementById('btn-play');
+const initialState = document.getElementById('initial-state');
+const loadingState = document.getElementById('loading-state');
+const progressText = document.getElementById('progress-text');
+
 let rubyVM = null;
 
-async function initRuby() {
+async function loadRuby() {
+  initialState.classList.add('hidden');
+  loadingState.classList.remove('hidden');
+
   try {
     const response = await fetch(rubyWasmUrl);
+    
     if (!response.ok) {
       throw new Error(`Failed to load Ruby WASM: ${response.status} ${response.statusText}`);
     }
-    const buffer = await response.arrayBuffer();
+
+    const contentLength = +response.headers.get('Content-Length');
+    const reader = response.body.getReader();
+
+    let receivedLength = 0;
+    let chunks = [];
+    
+    while(true) {
+      const {done, value} = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      chunks.push(value);
+      receivedLength += value.length;
+      
+      if (contentLength) {
+         const percent = Math.round((receivedLength / contentLength) * 100);
+         progressText.innerText = `Downloading Ruby... ${percent}%`;
+      } else {
+         progressText.innerText = `Downloading Ruby... ${(receivedLength / 1024 / 1024).toFixed(1)} MB`;
+      }
+    }
+
+    progressText.innerText = 'Compiling WASM...';
+    
+    let chunksAll = new Uint8Array(receivedLength);
+    let position = 0;
+    for(let chunk of chunks) {
+      chunksAll.set(chunk, position);
+      position += chunk.length;
+    }
+
+    const buffer = chunksAll.buffer;
     const module = await WebAssembly.compile(buffer);
     const { vm } = await DefaultRubyVM(module);
     
     rubyVM = vm;
-    outputDiv.innerHTML = '<span style="color: #666;">Ruby VM Ready. Press Play to run.</span>';
+    
+    loadingState.classList.add('hidden');
+    outputDiv.innerHTML = '<div style="color: #666; padding: 10px;">Ruby VM Ready. Press Play to run.</div>';
+    
   } catch (e) {
     console.error(e);
+    loadingState.classList.add('hidden');
     outputDiv.innerText = "Error loading Ruby VM: " + e.message;
+    // Show load button again?
+    // initialState.classList.remove('hidden');
   }
 }
 
-initRuby();
+btnLoadRuby.addEventListener('click', loadRuby);
+
 
 // 4. Play Button Logic
 document.getElementById('btn-play').addEventListener('click', async () => {
   if (!rubyVM) {
-    alert("Ruby VM is still loading...");
+    alert("Please load the Ruby Runtime first.");
     return;
   }
 

@@ -35,7 +35,13 @@
       <div class="pane output-pane" id="output-pane">
         <div class="pane-header">Output Window</div>
         <div id="output" class="output-container">
-          <div class="loading-state">Initializing Ruby VM...</div>
+          <div class="initial-state" id="initial-state">
+             <button id="btn-load-ruby">Load Ruby Runtime</button>
+          </div>
+          <div class="loading-state hidden" id="loading-state">
+             <div class="spinner"></div>
+             <div class="progress-text" id="progress-text">Downloading Ruby... 0%</div>
+          </div>
         </div>
       </div>
     </div>
