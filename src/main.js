@@ -31,6 +31,8 @@ const btnPlay = document.getElementById('btn-play');
 const initialState = document.getElementById('initial-state');
 const loadingState = document.getElementById('loading-state');
 const progressText = document.getElementById('progress-text');
+const inputContainer = document.getElementById('input-container');
+const inputField = document.getElementById('input-field');
 
 let rubyVM = null;
 
@@ -91,15 +93,40 @@ async function loadRuby() {
     console.error(e);
     loadingState.classList.add('hidden');
     outputDiv.innerText = "Error loading Ruby VM: " + e.message;
-    // Show load button again?
-    // initialState.classList.remove('hidden');
   }
 }
 
 btnLoadRuby.addEventListener('click', loadRuby);
 
 
-// 4. Play Button Logic
+// 4. IO Handling
+self.printToOutput = (text) => {
+  // Use appendChild for safety and performance
+  outputDiv.appendChild(document.createTextNode(text));
+  outputDiv.scrollTop = outputDiv.scrollHeight;
+}
+
+self.waitForInput = async () => {
+  inputContainer.classList.remove('hidden');
+  inputField.value = '';
+  inputField.focus();
+
+  return new Promise((resolve) => {
+    const handler = (e) => {
+      if (e.key === 'Enter') {
+        inputField.removeEventListener('keydown', handler);
+        inputContainer.classList.add('hidden');
+        const value = inputField.value;
+        // Echo input to output with newline
+        self.printToOutput(value + "\n");
+        resolve(value);
+      }
+    };
+    inputField.addEventListener('keydown', handler);
+  });
+};
+
+// 5. Play Button Logic
 document.getElementById('btn-play').addEventListener('click', async () => {
   if (!rubyVM) {
     alert("Please load the Ruby Runtime first.");
@@ -107,12 +134,10 @@ document.getElementById('btn-play').addEventListener('click', async () => {
   }
 
   const code = editor.getValue();
-  outputDiv.innerText = "Running...";
+  outputDiv.innerText = ""; // Clear output
+  btnPlay.disabled = true;
 
-  // Wrap code to capture stdout
-  // We use a simple approach: $stdout = StringIO.new; ...; $stdout.string
   const wrappedCode = `
-    require 'stringio'
     require 'js'
 
     module Kernel
@@ -123,33 +148,51 @@ document.getElementById('btn-play').addEventListener('click', async () => {
       end
     end
 
-    $stdout = StringIO.new
+    class BrowserStdout
+      def write(str)
+        JS.global.printToOutput(str.to_s)
+        str.to_s.bytesize
+      end
+    end
+
+    class BrowserStdin
+      def gets
+        val = JS.global.waitForInput.await
+        val.to_s + "\n"
+      end
+      
+      def readline
+        gets
+      end
+      
+      def read
+        gets
+      end
+    end
+
+    $stdout = BrowserStdout.new
+    $stderr = BrowserStdout.new
+    $stdin = BrowserStdin.new
+
     begin
       ${code}
     rescue Exception => e
       puts "Error: #{e.message}"
       puts e.backtrace.join("\n")
     end
-    $stdout.string
   `;
 
   try {
-    const result = await rubyVM.evalAsync(wrappedCode);
-    // result is a RubyValue. toString() gives the inspection.
-    // We want the string content.
-    const output = result.toString();
-    outputDiv.innerText = output;
-    // Auto-scroll to bottom
-    outputDiv.scrollTop = outputDiv.scrollHeight;
+    await rubyVM.evalAsync(wrappedCode);
   } catch (e) {
     console.error(e);
-    outputDiv.innerText = "Execution Error: " + (e.message || e);
-    // Auto-scroll to bottom
-    outputDiv.scrollTop = outputDiv.scrollHeight;
+    self.printToOutput("\nExecution Error: " + (e.message || e));
+  } finally {
+    btnPlay.disabled = false;
   }
 });
 
-// 5. Save Button Logic
+// 6. Save Button Logic
 document.getElementById('btn-save').addEventListener('click', () => {
   const code = editor.getValue();
   const blob = new Blob([code], { type: 'text/x-ruby' });
@@ -161,7 +204,7 @@ document.getElementById('btn-save').addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
 
-// 6. Eye/Hide Button Logic
+// 7. Eye/Hide Button Logic
 const btnEye = document.getElementById('btn-eye');
 const outputPane = document.getElementById('output-pane');
 const workspace = document.getElementById('workspace');
@@ -173,15 +216,11 @@ btnEye.addEventListener('click', () => {
     // Show it
     outputPane.classList.remove('hidden');
     workspace.classList.remove('full-width');
-    // Eye open icon? Or just keep same icon.
-    // Usually "Hide" implies closing.
   } else {
     // Hide it
     outputPane.classList.add('hidden');
     workspace.classList.add('full-width');
   }
   
-  // Trigger editor resize
-  // automaticLayout handles it, but sometimes a manual trigger helps if transition is instant.
-  // With automaticLayout: true, it should work.
+  // automaticLayout handles resize
 });
