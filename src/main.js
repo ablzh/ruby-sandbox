@@ -1,5 +1,6 @@
 import '../style.css';
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import 'monaco-editor/esm/vs/basic-languages/ruby/ruby.contribution';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/browser';
 import rubyWasmUrl from '@ruby/3.3-wasm-wasi/dist/ruby+stdlib.wasm?url';
