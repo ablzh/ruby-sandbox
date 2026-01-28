@@ -5,6 +5,13 @@ export default defineConfig({
   base: "./", // Ensures assets are loaded correctly on GitHub Pages
   build: {
     target: "esnext", // WebAssembly requires modern browser support
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        docs: 'docs.html',
+        about: 'about.html'
+      }
+    }
   },
   plugins: [
     {

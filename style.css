@@ -296,3 +296,38 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* Content Pages (Docs, About) */
+.content-page {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  color: var(--text-white);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  width: 100%;
+}
+
+.content-page h1, .content-page h2 {
+  margin-bottom: 20px;
+  color: var(--banner-color);
+}
+
+.content-page p {
+  margin-bottom: 15px;
+}
+
+.content-page ul {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.content-page a {
+  color: var(--banner-color);
+  text-decoration: none;
+}
+
+.content-page a:hover {
+  text-decoration: underline;
+}
