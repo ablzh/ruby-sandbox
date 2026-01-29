@@ -14,15 +14,6 @@ export default defineConfig({
     }
   },
   plugins: [
-    {
-      name: "html-inject-year",
-      transformIndexHtml(html) {
-        return html.replace(
-          "%BUILD_YEAR%",
-          new Date().getFullYear().toString(),
-        );
-      },
-    },
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",

@@ -1,4 +1,9 @@
 import '../style.css';
+import { initLayout } from './layout.js';
+
+// Initialize Layout (Navbar, Banner, Footer) before selecting elements
+initLayout({ showControls: true });
+
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import 'monaco-editor/esm/vs/basic-languages/ruby/ruby.contribution';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
