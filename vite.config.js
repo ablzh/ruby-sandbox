@@ -19,8 +19,24 @@ export default defineConfig({
       injectRegister: "auto",
       workbox: {
         maximumFileSizeToCacheInBytes: 50000000,
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,wasm}"],
+        // Removed 'wasm' from precache so it doesn't download on page load
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         cleanupOutdatedCaches: true,
+        // Add runtime caching for WASM files
+        runtimeCaching: [{
+          urlPattern: ({ url }) => url.pathname.endsWith('.wasm'),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'ruby-wasm-cache',
+            expiration: {
+              maxEntries: 2,
+              maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }]
       },
     }),
   ],
