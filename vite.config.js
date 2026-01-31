@@ -17,6 +17,23 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
+      manifest: {
+        name: "Ruby Sandbox",
+        short_name: "Ruby Sandbox",
+        description: "An interactive Ruby playground and sandbox environment. Run Ruby code directly in your browser using WebAssembly.",
+        theme_color: "#cc342d",
+        background_color: "#1e1e1e",
+        display: "standalone",
+        start_url: "./index.html",
+        icons: [
+          {
+            src: "favicon.svg",
+            sizes: "any",
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ]
+      },
       workbox: {
         maximumFileSizeToCacheInBytes: 50000000,
         // Removed 'wasm' from precache so it doesn't download on page load
