@@ -331,3 +331,65 @@ body {
 .content-page a:hover {
   text-decoration: underline;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Allow navbar to grow and stack */
+  .navbar {
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .nav-menu a {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /* Allow banner text to wrap */
+  .banner {
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  /* Stack Editor and Output vertically */
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    /* Ensure the workspace still takes up remaining height */
+    flex: 1; 
+    overflow: hidden; /* Prevent body scroll if content fits */
+  }
+
+  .pane {
+    flex: 1; /* Split vertical space evenly */
+    min-height: 0; /* Crucial for nested scrolling */
+  }
+
+  /* Stack footer content */
+  .footer {
+    height: auto;
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .footer-center {
+    order: 2; /* Put copyright in the middle or bottom as desired, or default flow */
+    margin-bottom: 5px;
+  }
+  
+  /* Reduce padding on content pages */
+  .content-page {
+    padding: 20px;
+  }
+}
