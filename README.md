@@ -5,6 +5,33 @@ Inspired by [Ken H. Burres III's Python Sandbox Turtle Mode](https://pythonsandb
 
 A single-page Ruby sandbox environment using Monaco Editor and Ruby WASM (WebAssembly).
 
+## Local Development
+
+To run this project locally, ensure you have **Node.js** installed.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/ablzh/ruby-sandbox.git
+    cd ruby-sandbox
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    Open `http://localhost:5173` in your browser. Changes will reload automatically.
+
+4.  **Build for production:**
+    ```bash
+    npm run build
+    ```
+    This compiles assets to the `dist/` directory.
+
 ## Credits
 
 ### Core Stack
