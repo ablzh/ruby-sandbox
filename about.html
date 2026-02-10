@@ -16,7 +16,50 @@
     <!-- Content -->
     <div class="content-page">
       <h1>About Ruby Sandbox</h1>
-      <p>The information will be here.</p>
+      <p>So, what’s the plan and why am I even doing this?</p>
+
+      <p>Originally, I was inspired by the Python sandbox and wanted to build something similar for Ruby. As a teacher, I know all too well: if a tool isn't documented and doesn't have a lesson plan, it basically doesn't exist for schools.</p>
+
+      <p>In primary and middle school, "Turtle" graphics are the bread and butter of programming. And, as you know, everyone uses Python for this. Even if a teacher wanted to use Ruby, they’d hit a wall:</p>
+
+      <ul>
+        <li>"Who’s going to let me?" (Getting Ruby installed on school computers is a mission).</li>
+        <li>"Where’s the curriculum?" (Okay, I got it installed, but what do I actually teach?).</li>
+        <li>"Wait, does Ruby even have a Turtle?" Spoiler: Ruby doesn't have a Turtle.</li>
+      </ul>
+
+      <p>I’ve spent years creating educational materials, and honestly, I have zero desire to write a whole new "Turtle curriculum" right now. I usually find more exciting ways to get students hooked anyway. But I do believe that the more diverse a language's ecosystem is, the better. So, I decided to build it.</p>
+
+      <h2>Current State & Future Plans</h2>
+      <p>Just to be clear: I'm just getting started. Right now, there’s only the Ruby WASM playground; everything else is a work in progress (assuming I have the time and energy).</p>
+
+      <p>My vision includes 3 modes:</p>
+
+      <ol>
+        <li>
+          <strong>Free Playground</strong><br>
+          Just a sandbox to poke at some code. No terminal, no debugger (and I don't plan on adding them—I want to keep it simple). Just use good old <code>puts</code> for debugging. It runs on WASM Ruby, so while it doesn't support everything CRuby does, it’s more than enough for the basics.
+        </li>
+        <li>
+          <strong>The Turtle (WIP)</strong><br>
+          I want to make it as close to the Python implementation as possible, so you can use the same teaching methods. A quick note: I’m not making a standalone gem or writing lessons myself. I’m building the tool. If any of you want to create a curriculum for it—awesome! I’ll happily link to it right here in the Turtle section.
+        </li>
+        <li>
+          <strong>Introductory Course (WIP)</strong><br>
+          I’m planning a beginner course inspired by the book <em>Learn to Program</em> by Chris Pine (That book is really good! Thanks, man!). The entire first part will be doable right here in the browser to lower the "barrier to entry" as much as possible.
+        </li>
+      </ol>
+
+      <h2>Why a Web Sandbox?</h2>
+      <p>Because setting up an environment for a total beginner is a nightmare.</p>
+
+      <p>I remember trying to learn C++ in middle school using a 3G modem with speeds measured in kilobytes... downloading Visual Studio, trying to configure everything—it was brutal. Modern students might not be the same kind of "nerds" I was, and I see how even basic things like file systems or ZIP archives can cause panic.</p>
+
+      <p>Before we force a student to fight with terminals and dependencies, they need a reason to care about the code itself. Ruby Sandbox is a way to try the language without the pain. No downloads, no setup. And if you want offline access, just "install" the site as a PWA (thanks to Vite, it works surprisingly well).</p>
+
+      <p>Bottom line: I want to hold your hand through the very first steps, but then let you fly solo once you’re ready for the "real" struggle with local environments.</p>
+
+      <p>If you recognized yourself in my description of a scared beginner—don't take it personally. I'm doing this specifically for you, my friend :)</p>
     </div>
 
     <!-- Footer is injected by src/layout.js -->
