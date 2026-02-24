@@ -1,5 +1,8 @@
 # Ruby Sandbox (WebAssembly)
 
+Visit [the Ruby Sandbox Kanban board.](https://app.fizzy.do/6145540/public/boards/n8HJv8QWDUmwWztYH68YBoZG)
+I've made the board public so everyone can see the tasks, plans, and thoughts on the project.
+
 This project is under active development; the README will be updated as the project evolves. 
 Inspired by [Ken H. Burres III's Python Sandbox Turtle Mode](https://pythonsandbox.com/), I wanted to build a similar experience for Ruby. Before diving into the "turtle" implementation, my primary focus is on establishing a solid Ruby sandbox environment.
 
