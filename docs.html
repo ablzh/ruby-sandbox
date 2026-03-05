@@ -19,7 +19,283 @@
     <!-- Content -->
     <div class="content-page">
       <h1>Documentation</h1>
-      <p>The information will be here.</p>
+
+      <h2>General Usage</h2>
+      <p>This Ruby Sandbox runs entirely in your browser using Ruby WASM. You can write standard Ruby code in the editor on the left and see the output on the right.</p>
+      <ul>
+        <li>Use <code>puts</code> or <code>print</code> to output text.</li>
+        <li>Use <code>gets</code> to read input from a prompt.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>puts "What is your name?"
+name = gets.chomp
+puts "Hello, #{name}!"</code></pre>
+      <hr>
+
+      <h1>Turtle graphics for Ruby</h1>
+
+      <h2>Introduction</h2>
+      <p>Turtle graphics is an implementation of the popular geometric drawing tools originally introduced in Logo. It provides an educational framework for simple graphics applications, providing instant, visible feedback to learners.</p>
+      <p>In this Ruby Sandbox environment, Turtle graphics is powered by Ruby WASM and draws directly onto an HTML5 Canvas.</p>
+
+      <h2>Get started</h2>
+      <p>Imagine a robotic turtle starting at <code>[0, 0]</code> in the x-y plane. After requiring the library and creating a turtle object, give it the command <code>turtle.forward(15)</code>, and it moves 15 pixels in the direction it is facing, drawing a line as it moves. Give it the command <code>turtle.right(25)</code>, and it rotates in-place 25 degrees clockwise.</p>
+      <pre><code>require 'turtle'
+
+turtle = Turtle.new
+turtle.forward(15)
+turtle.right(25)</code></pre>
+
+      <h2>Tutorial</h2>
+      <p>New users should start here. In this tutorial we'll explore some of the basics of turtle drawing.</p>
+
+      <h3>Starting a turtle environment</h3>
+      <p>In your Sandbox, simply require the library and instantiate a new Turtle object:</p>
+      <pre><code>require 'turtle'
+turtle = Turtle.new</code></pre>
+
+      <h3>Basic drawing</h3>
+      <p>Send the turtle forward 100 steps:</p>
+      <pre><code>turtle.forward(100)</code></pre>
+      <p>You should see a line drawn by the turtle, heading East. Change the direction of the turtle, so that it turns 120 degrees left (anti-clockwise):</p>
+      <pre><code>turtle.left(120)</code></pre>
+      <p>Let's continue by drawing a triangle:</p>
+      <pre><code>turtle.forward(100)
+turtle.left(120)
+turtle.forward(100)</code></pre>
+      <p>Experiment with those commands, and also with <code>turtle.backward()</code> and <code>turtle.right()</code>.</p>
+
+      <h3>Pen control</h3>
+      <p>Try changing the color - for example, <code>turtle.color('blue')</code> - and width of the line - for example, <code>turtle.width(3)</code> - and then drawing again.</p>
+      <p>You can also move the turtle around without drawing, by lifting up the pen: <code>turtle.up()</code> before moving. To start drawing again, use <code>turtle.down()</code>.</p>
+
+      <h3>The turtle's position</h3>
+      <p>Send your turtle back to its starting-point:</p>
+      <pre><code>turtle.home()</code></pre>
+      <p>Get the turtle's current x-y coordinates with:</p>
+      <pre><code>turtle.pos()</code></pre>
+      <p>Home is at <code>[0, 0]</code>.</p>
+      <p>To clear the window so we can start anew:</p>
+      <pre><code>turtle.clear()</code></pre>
+
+      <h3>Making algorithmic patterns</h3>
+      <p>Using loops, it's possible to build up geometric patterns:</p>
+      <pre><code>100.times do |steps|
+  ['blue', 'red', 'green'].each do |c|
+    turtle.color(c)
+    turtle.forward(steps)
+    turtle.right(30)
+  end
+end</code></pre>
+
+      <p>Let's draw a star shape. We want red lines, filled in with yellow:</p>
+      <pre><code>turtle.color('red')
+turtle.fillcolor('yellow')
+
+turtle.begin_fill()
+
+loop do
+  turtle.forward(200)
+  turtle.left(170)
+  # Check if we are close to home [0, 0]
+  pos = turtle.pos()
+  break if pos[0].abs &lt; 1 && pos[1].abs &lt; 1
+end
+
+turtle.end_fill()</code></pre>
+
+      <p>Alternatively, you can use a block for filling:</p>
+      <pre><code>turtle.color('red', 'yellow')
+turtle.fill do
+  5.times do
+    turtle.forward(200)
+    turtle.left(144)
+  end
+end</code></pre>
+
+      <h2>Turtle graphics reference</h2>
+      <p>Most of the examples in this section assume you have instantiated a turtle:<br>
+      <code>turtle = Turtle.new</code></p>
+
+      <h3>Turtle motion</h3>
+
+      <h4><code>forward(distance)</code> / <code>fd(distance)</code></h4>
+      <p>Move the turtle forward by the specified <code>distance</code>, in the direction the turtle is headed.</p>
+      <pre><code>turtle.forward(25)</code></pre>
+
+      <h4><code>backward(distance)</code> / <code>bk(distance)</code> / <code>back(distance)</code></h4>
+      <p>Move the turtle backward by <code>distance</code>, opposite to the direction the turtle is headed. Do not change the turtle's heading.</p>
+      <pre><code>turtle.backward(30)</code></pre>
+
+      <h4><code>right(angle)</code> / <code>rt(angle)</code></h4>
+      <p>Turn turtle right by <code>angle</code> units. (Units are by default degrees).</p>
+      <pre><code>turtle.right(45)</code></pre>
+
+      <h4><code>left(angle)</code> / <code>lt(angle)</code></h4>
+      <p>Turn turtle left by <code>angle</code> units.</p>
+      <pre><code>turtle.left(45)</code></pre>
+
+      <h4><code>goto(x, y = nil)</code> / <code>setpos(x, y = nil)</code> / <code>setposition(x, y = nil)</code></h4>
+      <p>Move turtle to an absolute position. If the pen is down, draw line. Do not change the turtle's orientation. You can pass x and y separately, or an array <code>[x, y]</code>.</p>
+      <pre><code>turtle.goto(60, 30)
+turtle.goto([20, 80])</code></pre>
+
+      <h4><code>setx(x)</code></h4>
+      <p>Set the turtle's first coordinate to <code>x</code>, leave second coordinate unchanged.</p>
+      <pre><code>turtle.setx(10)</code></pre>
+
+      <h4><code>sety(y)</code></h4>
+      <p>Set the turtle's second coordinate to <code>y</code>, leave first coordinate unchanged.</p>
+      <pre><code>turtle.sety(-10)</code></pre>
+
+      <h4><code>setheading(to_angle)</code> / <code>seth(to_angle)</code></h4>
+      <p>Set the orientation of the turtle to <code>to_angle</code>. 0 is East, 90 is North, 180 is West, 270 is South.</p>
+      <pre><code>turtle.setheading(90)</code></pre>
+
+      <h4><code>home()</code></h4>
+      <p>Move turtle to the origin <code>[0, 0]</code> and set its heading to its start-orientation (0 degrees / East).</p>
+      <pre><code>turtle.home()</code></pre>
+
+      <h4><code>circle(radius, extent = nil, steps = nil)</code></h4>
+      <p>Draw a circle with given <code>radius</code>. <code>extent</code> determines which part of the circle is drawn (e.g., 180 for a semicircle). <code>steps</code> determines the number of steps to use, which can be used to draw regular polygons.</p>
+      <pre><code>turtle.circle(50)
+turtle.circle(120, 180) # draw a semicircle</code></pre>
+
+      <h4><code>dot(size = nil, color = nil)</code></h4>
+      <p>Draw a circular dot with diameter <code>size</code>, using <code>color</code>.</p>
+      <pre><code>turtle.dot(20, "blue")</code></pre>
+
+      <h4><code>speed(speed = nil)</code></h4>
+      <p>Set the turtle's speed to an integer value in the range 0..10. 1 is slowest, 10 is fast, 0 is fastest (no animation).</p>
+      <pre><code>turtle.speed(9)
+turtle.speed('fast')</code></pre>
+
+      <h3>Tell Turtle's state</h3>
+
+      <h4><code>position()</code> / <code>pos()</code></h4>
+      <p>Return the turtle's current location <code>[x, y]</code>.</p>
+      <pre><code>turtle.pos() # =&gt; [440.0, 0.0]</code></pre>
+
+      <h4><code>towards(x, y = nil)</code></h4>
+      <p>Return the angle between the line from turtle position to position specified by <code>(x, y)</code>.</p>
+      <pre><code>turtle.towards(0, 0)</code></pre>
+
+      <h4><code>xcor()</code></h4>
+      <p>Return the turtle's x coordinate.</p>
+
+      <h4><code>ycor()</code></h4>
+      <p>Return the turtle's y coordinate.</p>
+
+      <h4><code>heading()</code></h4>
+      <p>Return the turtle's current heading.</p>
+
+      <h4><code>distance(x, y = nil)</code></h4>
+      <p>Return the distance from the turtle to <code>(x, y)</code>.</p>
+
+      <h3>Pen control</h3>
+
+      <h4><code>pendown()</code> / <code>pd()</code> / <code>down()</code></h4>
+      <p>Pull the pen down -- drawing when moving.</p>
+
+      <h4><code>penup()</code> / <code>pu()</code> / <code>up()</code></h4>
+      <p>Pull the pen up -- no drawing when moving.</p>
+
+      <h4><code>pensize(width = nil)</code> / <code>width(width = nil)</code></h4>
+      <p>Set the line thickness to <code>width</code> or return it.</p>
+      <pre><code>turtle.pensize(10)</code></pre>
+
+      <h4><code>isdown()</code></h4>
+      <p>Return <code>true</code> if pen is down, <code>false</code> if it's up.</p>
+
+      <h3>Color control</h3>
+
+      <h4><code>pencolor(*args)</code></h4>
+      <p>Return or set the pencolor. Can be a string like <code>"red"</code>, a hex string like <code>"#33cc8c"</code>, or RGB values.</p>
+      <pre><code>turtle.pencolor("brown")
+turtle.pencolor(50, 193, 143)</code></pre>
+
+      <h4><code>fillcolor(*args)</code></h4>
+      <p>Return or set the fillcolor.</p>
+      <pre><code>turtle.fillcolor("violet")</code></pre>
+
+      <h4><code>color(*args)</code></h4>
+      <p>Return or set pencolor and fillcolor.</p>
+      <pre><code>turtle.color("red", "green") # pencolor is red, fillcolor is green</code></pre>
+
+      <h3>Filling</h3>
+
+      <h4><code>filling()</code></h4>
+      <p>Return fillstate (<code>true</code> if filling, <code>false</code> otherwise).</p>
+
+      <h4><code>begin_fill()</code></h4>
+      <p>To be called just before drawing a shape to be filled.</p>
+
+      <h4><code>end_fill()</code></h4>
+      <p>Fill the shape drawn after the last call to <code>begin_fill()</code>.</p>
+
+      <h4><code>fill(&amp;block)</code></h4>
+      <p>Fill the shape drawn inside the block.</p>
+      <pre><code>turtle.color("black", "red")
+turtle.fill do
+  turtle.circle(80)
+end</code></pre>
+
+      <h3>More drawing control</h3>
+
+      <h4><code>reset()</code></h4>
+      <p>Delete the turtle's drawings from the screen, re-center the turtle and set variables to the default values.</p>
+
+      <h4><code>clear()</code></h4>
+      <p>Delete the turtle's drawings from the screen. Do not move turtle.</p>
+
+      <h4><code>write(arg, move = false, align = "left", font = ["Arial", 8, "normal"])</code></h4>
+      <p>Write text - the string representation of <code>arg</code> - at the current turtle position.</p>
+      <pre><code>turtle.write("Hello World", false, "center", ["Arial", 16, "bold"])</code></pre>
+
+      <h3>Turtle state</h3>
+
+      <h4><code>hideturtle()</code> / <code>ht()</code></h4>
+      <p>Make the turtle invisible. Speeds up drawing.</p>
+
+      <h4><code>showturtle()</code> / <code>st()</code></h4>
+      <p>Make the turtle visible.</p>
+
+      <h4><code>isvisible()</code></h4>
+      <p>Return <code>true</code> if the Turtle is shown, <code>false</code> if it's hidden.</p>
+
+      <h4><code>shape(name = nil)</code></h4>
+      <p>Set turtle shape to shape with given <code>name</code> (e.g. "arrow", "turtle", "circle", "square", "triangle", "classic").</p>
+      <pre><code>turtle.shape("turtle")</code></pre>
+
+      <h4><code>shapesize(stretch_wid = nil, stretch_len = nil, outline = nil)</code></h4>
+      <p>Scale the turtle's shape.</p>
+      <pre><code>turtle.shapesize(5, 5, 12)</code></pre>
+
+      <h2>Screen Methods</h2>
+      <p>You can access the screen object via the turtle to change global properties.</p>
+      <pre><code>screen = turtle.getscreen()</code></pre>
+
+      <h4><code>bgcolor(*args)</code></h4>
+      <p>Set or return background color of the TurtleScreen.</p>
+      <pre><code>screen.bgcolor("orange")</code></pre>
+
+      <h4><code>bgpic(picname = nil)</code></h4>
+      <p>Set background image.</p>
+      <pre><code>screen.bgpic("landscape.png")</code></pre>
+
+      <h4><code>clearscreen()</code></h4>
+      <p>Delete all drawings and all turtles from the TurtleScreen.</p>
+
+      <h4><code>tracer(n = nil, delay = nil)</code></h4>
+      <p>Turn turtle animation on/off and set delay for update drawings. If <code>n</code> is given, only each n-th regular screen update is really performed. Use this to accelerate the drawing of complex graphics.</p>
+      <pre><code>screen.tracer(8, 25)</code></pre>
+
+      <h4><code>update()</code></h4>
+      <p>Perform a TurtleScreen update. To be used when tracer is turned off.</p>
+
+      <h4><code>delay(delay = nil)</code></h4>
+      <p>Set or return the drawing <code>delay</code> in milliseconds. The longer the drawing delay, the slower the animation.</p>
+
     </div>
 
     <!-- Footer is injected by src/layout.js -->
