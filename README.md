@@ -49,4 +49,4 @@ To run this project locally, ensure you have **Node.js** installed.
 ### AI Assistance
 This project was built with the assistance of:
 - **Agent**: [Opencode CLI](https://opencode.ai/)
-- **Model**: Google Gemini 3 Pro
+- **Model**: Google Gemini 3 Pro / Google Gemini 3 Flash
