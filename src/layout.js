@@ -8,7 +8,7 @@ export function initLayout({ showControls = false } = {}) {
         <a href="./index.html">Home</a>
         <a href="./docs.html">Docs</a>
         <a href="./about.html">About Ruby Sandbox</a>
-        <a href="https://ablzh.github.io/">Contact</a>
+        <a href="./contact.html">Contact</a>
       </div>
     </nav>
   `;

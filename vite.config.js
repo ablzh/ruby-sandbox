@@ -6,11 +6,12 @@ export default defineConfig({
   build: {
     target: "esnext", // WebAssembly requires modern browser support
     rollupOptions: {
-      input: {
-        main: 'index.html',
-        docs: 'docs.html',
-        about: 'about.html'
-      }
+        input: {
+          main: 'index.html',
+          docs: 'docs.html',
+          about: 'about.html',
+          contact: 'contact.html'
+        }
     }
   },
   plugins: [
