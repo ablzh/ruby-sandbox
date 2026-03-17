@@ -68,10 +68,18 @@ async function loadRuby() {
       chunks.push(value);
       receivedLength += value.length;
       
-      // Since the browser automatically decompresses the file while downloading,
-      // the downloaded data size exceeds the original 'Content-Length' header.
-      // We display the downloaded size in MB instead of a percentage.
-      progressText.innerText = `Downloading Ruby... ${(receivedLength / 1024 / 1024).toFixed(1)} MB`;
+      if (contentLength) {
+        const estimatedTotal = contentLength;
+        const currentMB = (receivedLength / 1024 / 1024).toFixed(1);
+        const totalMB = (estimatedTotal / 1024 / 1024).toFixed(1);
+        
+        // Ensure we don't show current > total due to slight estimation errors
+        const displayCurrent = Math.min(currentMB, totalMB).toFixed(1);
+        
+        progressText.innerText = `Downloading Ruby... ${displayCurrent} MB / ~${totalMB} MB`;
+      } else {
+        progressText.innerText = `Downloading Ruby... ${(receivedLength / 1024 / 1024).toFixed(1)} MB`;
+      }
     }
 
     progressText.innerText = 'Compiling WASM...';
