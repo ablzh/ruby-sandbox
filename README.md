@@ -1,4 +1,11 @@
-# Ruby Sandbox (WebAssembly)
+# [Ruby Sandbox (WebAssembly)](https://ablzh.github.io/ruby-sandbox/)
+
+
+![Screenshot 2026-03-10 at 19 54 15](https://github.com/user-attachments/assets/bc1f58a5-869d-4c2a-984e-04c4e34d67e7)
+
+
+Visit [the Ruby Sandbox Kanban board.](https://app.fizzy.do/6145540/public/boards/n8HJv8QWDUmwWztYH68YBoZG)
+I've made the board public so everyone can see the tasks, plans, and thoughts on the project.
 
 This project is under active development; the README will be updated as the project evolves. 
 Inspired by [Ken H. Burres III's Python Sandbox Turtle Mode](https://pythonsandbox.com/), I wanted to build a similar experience for Ruby. Before diving into the "turtle" implementation, my primary focus is on establishing a solid Ruby sandbox environment.
@@ -42,4 +49,4 @@ To run this project locally, ensure you have **Node.js** installed.
 ### AI Assistance
 This project was built with the assistance of:
 - **Agent**: [Opencode CLI](https://opencode.ai/)
-- **Model**: Google Gemini 3 Pro
+- **Model**: Google Gemini 3 Pro / Google Gemini 3 Flash
