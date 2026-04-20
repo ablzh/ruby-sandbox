@@ -1,4 +1,4 @@
-# [Ruby Sandbox (WebAssembly)](https://ablzh.github.io/ruby-sandbox/)
+# [Ruby Sandbox (WebAssembly)](https://ablzh.dev/ruby-sandbox/index.html)
 
 
 ![Screenshot 2026-03-10 at 19 54 15](https://github.com/user-attachments/assets/bc1f58a5-869d-4c2a-984e-04c4e34d67e7)
@@ -48,5 +48,5 @@ To run this project locally, ensure you have **Node.js** installed.
 
 ### AI Assistance
 This project was built with the assistance of:
-- **Agent**: [Opencode CLI](https://opencode.ai/)
-- **Model**: Google Gemini 3 Pro / Google Gemini 3 Flash
+- **Agents**: [Opencode CLI](https://opencode.ai/) / [Gemini CLI](https://geminicli.com/)
+- **Models**: Google Gemini 3 Pro / Google Gemini 3 Flash
