@@ -13,18 +13,6 @@ export function initLayout({ showControls = false } = {}) {
     </nav>
   `;
 
-  const bannerHtml = `
-    <div class="banner">
-      <p>
-        This playground is under active development; Found a bug or have a
-        suggestion? Please create
-        <a href="https://github.com/ablzh/ruby-sandbox"
-          >an issue in the repository</a
-        >. Thanks! :)
-      </p>
-    </div>
-  `;
-
   const footerLeftHtml = showControls ? `
         <button id="btn-play" class="btn-icon btn-play" title="Run Code">
           <!-- Cyan Square with White Triangle -->
@@ -89,7 +77,6 @@ export function initLayout({ showControls = false } = {}) {
 
   // Inject into body
   // Order: Navbar -> Banner -> Existing Content -> Footer
-  document.body.insertAdjacentHTML('afterbegin', bannerHtml);
   document.body.insertAdjacentHTML('afterbegin', navbarHtml);
   document.body.insertAdjacentHTML('beforeend', footerHtml);
 }
